@@ -34,9 +34,7 @@ fn main() -> Result<(), Error> {
 
     // 训练文件路径
     let files = vec![
-        "data/wiki.train.raw".into(),
-        "data/wiki.test.raw".into(),
-        "data/wiki.valid.raw".into(),
+        "data/wikitext/wiki.test.raw".into(),
     ];
 
     // 使用文件训练分词器
@@ -46,6 +44,7 @@ fn main() -> Result<(), Error> {
     // 保存分词器
     tokenizer.save("models/tokenizer-wiki.json", false)
         .map_err(|e| anyhow::anyhow!(e))?;
+    println!("分词器已保存到 models/tokenizer-wiki.json");
     // 从文件加载分词器
     let tokenizer = Tokenizer::from_file("models/tokenizer-wiki.json")
         .map_err(|e| anyhow::anyhow!(e))?;
@@ -55,7 +54,8 @@ fn main() -> Result<(), Error> {
         .map_err(|e| anyhow::anyhow!(e))?;
 
     // 输出编码结果
-    info!("编码结果: {:?}", encoder_result);
-
+    println!("编码结果: {:?}", encoder_result);
+    let decode_result = tokenizer.decode(encoder_result.get_ids(), true);
+    println!("解码结果: {:?}", decode_result);
     Ok(())
 }
