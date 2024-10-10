@@ -1,0 +1,13 @@
+[package]
+name = "quickstart"
+version = "0.1.0"
+edition = "2021"
+authors= ["Bobzhang <admin@wcpsoft.cn>"]
+[dependencies]
+anyhow = "1.0"
+log = "0.4"
+env_logger = "0.11"
+tokenizers = "0.20"
+[[bin]]
+name = "quickstart"
+path = "src/main.rs"
