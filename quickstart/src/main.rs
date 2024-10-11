@@ -42,11 +42,11 @@ fn main() -> Result<(), Error> {
         .map_err(|e| anyhow::anyhow!(e))?;
 
     // 保存分词器
-    tokenizer.save("models/tokenizer-wiki.json", false)
+    tokenizer.save("quickstart/models/tokenizer-wiki.json", false)
         .map_err(|e| anyhow::anyhow!(e))?;
-    println!("分词器已保存到 models/tokenizer-wiki.json");
+    println!("分词器已保存到 quickstart/models/tokenizer-wiki.json");
     // 从文件加载分词器
-    let tokenizer = Tokenizer::from_file("models/tokenizer-wiki.json")
+    let tokenizer = Tokenizer::from_file("quickstart/models/tokenizer-wiki.json")
         .map_err(|e| anyhow::anyhow!(e))?;
 
     // 对输入进行编码
@@ -55,7 +55,7 @@ fn main() -> Result<(), Error> {
 
     // 输出编码结果
     println!("编码结果: {:?}", encoder_result);
-    let decode_result = tokenizer.decode(encoder_result.get_ids(), true);
+    let decode_result = tokenizer.decode(encoder_result.get_ids(), false);
     println!("解码结果: {:?}", decode_result);
     Ok(())
 }
